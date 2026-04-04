@@ -1,0 +1,33 @@
+/******************************************************************************
+
+Autor: Jorge Alberto Silva Lomas
+Fecha: 03/04/2026
+Descripcion: Realizaremos un codigo con el cual vamos a sumar, restar,
+multiplicar y dividir, numeros enteros o decimales.
+
+*******************************************************************************/
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    float numero1, numero2;
+    
+    cout << "Escribe el primer numero: ";
+    cin >> numero1;
+    
+    cout << "Escribe el segundo numero: ";
+    cin >> numero2;
+    
+    cout << "La suma es: " << numero1 + numero2 << endl; 
+    cout << "La resta es: " << numero1 - numero2 << endl;
+    cout << "La multiplicacion es: " << numero1 * numero2 << endl;
+    
+    if (numero2 != 0) {
+        cout << "La division es: " << numero1 / numero2 << endl;
+    } else {
+        cout << "No se puede dividir entre cero." << endl;
+    }
+    
+    return 0;
+}
