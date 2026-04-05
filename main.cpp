@@ -1,0 +1,110 @@
+/******************************************************************************
+
+Autor: Jorge Alberto Silva Lomas
+Fecha: 03/04/2026
+Descripcion: Realizaremos un codigo con el cual vamos a sacar el RFC.
+
+*******************************************************************************/
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+// Diccionario de palabras no permitidas
+const std::vector<std::string> palabrasProhibidas = {
+"PENE", "CACA", "PUTO", "MAMO", "CULO", "QULO", "TETA", "PEDO", "JOTO",
+"VERG", "KAKA", "CAGO", "CAGA", "FETO", "PUTA", "RUIN", "COGE", "COJE"
+"KULO", "MION", "PITO", "LOCO", "VAGO", "VAGA", "SENO"
+};
+
+// Verificar y modificar palabras prohibidas del diccionario
+std::string corregirRFC(const std::string& rfc) {
+for (const std::string& palabra : palabrasProhibidas) {
+if (rfc == palabra) {
+return rfc.substr(0, 3) + "X"; // Reemplaza la última letra por 'X'
+}
+}
+return rfc;
+}
+
+class persona {
+private:
+string nombre;
+string apellidoPaterno;
+string apellidoMaterno;
+int dia, mes, anio;
+
+public:
+void capturarDatos() {
+ cout << "Ingresar nombre: ";
+cin >> nombre;
+
+cout << "Ingresar apellido paterno: ";
+cin >> apellidoPaterno;
+
+cout << "Ingresar apellido materno (si no tiene, escribe x): ";
+cin >> apellidoMaterno;
+
+cout << "Ingresa dia de nacimiento: ";
+cin >> dia;
+
+cout << "Ingresa mes de nacimiento: ";
+cin >> mes;
+
+cout << "Ingresa anio de nacimiento: ";
+cin >> anio;
+}
+
+char primeraVocal(string palabra) {
+for (int i = 1; i < palabra.length(); i ++) {
+if (palabra [i]=='A'|| palabra [i]=='E'|| palabra [i]=='I'|| palabra [i]=='O'|| palabra [i]=='U'||
+palabra [i]=='a'|| palabra [i]=='e'|| palabra [i]=='i'|| palabra [i]=='o'|| palabra [i]=='u') {
+return toupper(palabra[i]);
+}
+
+}
+return 'X';
+}
+
+string generarRFC() {
+string rfc = "";
+
+// 1 y 2: apellido paterno
+rfc += toupper(apellidoPaterno[0]);
+rfc += primeraVocal(apellidoPaterno);
+
+// 3: apellido materno
+if (apellidoMaterno != "X")
+rfc += toupper(apellidoMaterno[0]);
+else
+rfc += 'X';
+
+// 4: nombre
+rfc += toupper(nombre[0]);
+
+// fecha de nacimiento
+rfc += to_string(anio).substr(2,2);
+
+if (mes < 10) rfc += "0";
+rfc += to_string(mes);
+
+if (dia < 10) rfc += "0";
+rfc += to_string(dia);
+
+return rfc;
+
+}
+
+};
+
+int main() {
+
+persona p;
+
+p.capturarDatos();
+
+cout << "Tu RFC es: " << p.generarRFC() << endl;
+
+return 0;
+
+}
